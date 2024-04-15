@@ -1,14 +1,15 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Редактирование клиента</title>
+    <title>Редактировать клиента</title>
 </head>
 <body>
-    <h1>Редактирование клиента</h1>
-    <form method="post">
+    <h1>Редактировать клиента</h1>
+    <form method="post" class="form-card">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Сохранить изменения</button>
+        <button type="submit" class="btn btn-primary">Добавить</button>
     </form>
 </body>
-</html>
+</html> 

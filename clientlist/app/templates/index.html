@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Сервис клиентов для студентов юристов</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+    Сервис клиентов для студентов юристов
+{% endblock %}
+
+{% block content %}
     <h1>Сервис клиентов для студентов юристов</h1>
-    <a href="{% url 'client_list' %}" class="btn btn-primary">Начало работы</a>
-    <a href="{% url 'add_client' %}" class="btn btn-primary">Добавить клиента</a>
-</body>
-</html>
+    <p>Добро пожаловать! Этот сервис предназначен для студентов-юристов, которые хотят управлять списком своих клиентов. Для начала работы, выберите одно из следующих действий:</p>
+    <ul class="list">
+        <li><a href="{% url 'client_list' %}" class="btn btn-primary">Просмотреть список клиентов</a></li>
+        <li><a href="{% url 'add_client' %}" class="btn btn-primary">Добавить нового клиента</a></li>
+    </ul>
+{% endblock %}
