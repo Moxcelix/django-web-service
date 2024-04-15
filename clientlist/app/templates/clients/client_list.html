@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Client List</title>
+    <title>Список клиентов</title>
+    <!-- Подключение Bootstrap CSS и JavaScript -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Client List</h1>
+    <h1>Список клиентов</h1>
     <ul>
-    {% for client in clients %}
-        <li>{{ client.full_name }} - {{ client.email }} - {{ client.phone_number }} - {{ client.address }}</li>
-    {% endfor %}
+        {% for client in clients %}
+            <li>
+                {{ client.full_name }} - {{ client.email }} - {{ client.phone_number }} - {{ client.address }}
+                <form id="delete-form-{{ client.id }}" method="post" action="{% url 'delete_client' client.id %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-{{ client.id }}">Удалить</button>
+
+                <!-- Модальное окно подтверждения удаления -->
+                <div class="modal fade" id="confirm-delete-{{ client.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Подтверждение удаления</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Вы уверены, что хотите удалить клиента "{{ client.full_name }}"?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                <button type="button" class="btn btn-danger" onclick="document.getElementById('delete-form-{{ client.id }}').submit();">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{% url 'edit_client' client.id %}" class="btn btn-primary">Изменить</a>
+                <a href="{% url 'client_detail' client.id %}" class="btn btn-info">Подробнее</a>
+            </li>
+        {% endfor %}
     </ul>
 </body>
 </html>
