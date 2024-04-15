@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Редактировать клиента</title>
-</head>
-<body>
+
+{% block title %}
+    Редактировать клиента
+{% endblock %}
+
+{% block content %}
     <h1>Редактировать клиента</h1>
     <form method="post" class="form-card">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Добавить</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
-</body>
-</html> 
+{% endblock %}
