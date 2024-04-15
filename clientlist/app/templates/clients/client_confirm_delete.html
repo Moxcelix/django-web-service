@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Подтверждение удаления клиента</title>
+</head>
+<body>
+    <h1>Вы уверены, что хотите удалить клиента "{{ client.full_name }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Да, удалить</button>
+    </form>
+</body>
+</html>
